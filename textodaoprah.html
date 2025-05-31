@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Opera In Frame</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    html, body {
+      height: 100%; width: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      background-color: black;
+      color: white;
+    }
+    #slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 40px 60px 60px 60px;
+      text-align: center;
+    }
+    #textBox {
+      max-width: 900px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      padding: 20px 30px;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      user-select: none;
+    }
+    #textBox.visible {
+      opacity: 1;
+    }
+    #titleIntro {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3.2rem;
+      font-weight: bold;
+      color: #f2e9dc;
+      background-color: black;
+      animation: fadeInOut 3s ease forwards;
+      user-select: none;
+      padding: 0 20px;
+      text-align: center;
+      z-index: 100;
+    }
+    @keyframes fadeInOut {
+      0% {opacity: 0;}
+      30% {opacity: 1;}
+      70% {opacity: 1;}
+      100% {opacity: 0;}
+    }
+    #controls {
+      position: fixed;
+      bottom: 20px;
+      display: flex;
+      gap: 20px;
+      z-index: 10;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.8);
+      cursor: pointer;
+      transition: background-color 0.3s;
+      user-select: none;
+    }
+    button:hover:not(:disabled) {
+      background-color: rgba(255, 255, 255, 1);
+    }
+    button:disabled {
+      background-color: rgba(180, 180, 180, 0.5);
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="slide"></div>
+  <div id="textBox"></div>
+
+  <div id="controls">
+    <button id="prevBtn" disabled>Anterior</button>
+    <button id="nextBtn">Próximo</button>
+  </div>
+
+  <div id="titleIntro">História da Opera In Frame</div>
+
+  <!-- Áudio de fundo -->
+  <audio id="backgroundMusic" autoplay loop></audio>
+  <!-- Som de clique -->
+  <audio id="clickSound" src="ip.wav"></audio>
+
+  <script>
+    const totalSlides = 7; // 0 = título, 1 a 6 capítulos
+    let currentIndex = 0;
+
+    const slideDiv = document.getElementById('slide');
+    const bgMusic = document.getElementById('backgroundMusic');
+    const clickSound = document.getElementById('clickSound');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const textBox = document.getElementById('textBox');
+    const titleIntro = document.getElementById('titleIntro');
+
+    // Textos para cada capítulo (1 a 6)
+    const chaptersText = [
+      "", // 0 = título só, sem texto
+      `1º Capítulo: O Início da Jornada
+      A Opera In Frame começa com a introdução de uma protagonista misteriosa, cujos segredos são revelados gradualmente. A narrativa nos conduz por um cenário repleto de símbolos enigmáticos e imagens evocativas, onde cada detalhe carrega um significado oculto. Neste capítulo, somos apresentados ao ambiente que dará forma aos acontecimentos posteriores, dando o tom de mistério e expectativa para a história que se desenrolará.`,
+
+      `2º Capítulo: Revelações e Conflitos
+      As primeiras revelações trazem à tona conflitos internos da personagem principal, que precisa lidar com escolhas difíceis. A trama se aprofunda nos relacionamentos e nas motivações que guiam as ações, revelando camadas de complexidade emocional. O cenário se torna mais intenso e os elementos visuais refletem a tensão crescente.`,
+
+      `3º Capítulo: Desafios e Transformações
+      Conforme a narrativa avança, a protagonista enfrenta obstáculos que desafiam suas crenças e valores. Essa parte é marcada por transformações significativas, tanto no enredo quanto na ambientação, que se torna mais dinâmica e cheia de nuances. O texto convida o leitor a refletir sobre a natureza da mudança e a importância da perseverança.`,
+
+      `4º Capítulo: Segredos do Passado
+      Um mergulho no passado revela segredos que explicam os eventos atuais, conectando fios da história que antes pareciam desconexos. As imagens ganham um tom mais sombrio e as músicas acompanham essa atmosfera de descoberta e suspense, enriquecendo a experiência imersiva.`,
+
+      `5º Capítulo: Confronto Final
+      O clímax da história se aproxima com um confronto decisivo que testará todos os personagens envolvidos. O texto ganha um ritmo mais acelerado, refletindo a urgência dos acontecimentos. A combinação de som e imagem cria uma tensão palpável, preparando o terreno para a conclusão.`,
+
+      `6º Capítulo: Epílogo e Reflexões
+      Encerrando a narrativa, o epílogo traz reflexões sobre as jornadas vividas, deixando perguntas abertas para o futuro. O tom é contemplativo, com uma mistura de melancolia e esperança, enquanto as últimas imagens e sons evocam um sentimento de encerramento e continuidade.` 
+    ];
+
+    function loadSlide(index) {
+      // Se index = 0: tela título (sem imagem e música normais)
+      if (index === 0) {
+        slideDiv.style.backgroundImage = `url('st0.jpg')`;
+        textBox.classList.remove('visible');
+        bgMusic.pause();
+        bgMusic.src = "";
+        prevBtn.disabled = true;
+        nextBtn.disabled = false;
+        // Mostra título animado e depois some
+        titleIntro.style.display = 'flex';
+        setTimeout(() => {
+          titleIntro.style.display = 'none';
+        }, 3000);
+        return;
+      }
+
+      // Para os capítulos 1 a 6:
+      titleIntro.style.display = 'none';
+
+      // Troca imagem
+      const imageName = `st${index}.jpg`;
+      slideDiv.style.backgroundImage = `url('${imageName}')`;
+
+      // Troca música
+      const musicName = `musica${index}.mp3`;
+      bgMusic.src = musicName;
+      bgMusic.play();
+
+      // Toca som de clique
+      clickSound.currentTime = 0;
+      clickSound.play();
+
+      // Texto do capítulo
+      textBox.textContent = chaptersText[index];
+      // Aparece com fade
+      textBox.classList.remove('visible');
+      setTimeout(() => {
+        textBox.classList.add('visible');
+      }, 100);
+
+      // Ajusta estado dos botões
+      prevBtn.disabled = (index === 1);
+      nextBtn.disabled = (index === totalSlides - 1);
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        loadSlide(currentIndex);
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < totalSlides - 1) {
+        currentIndex++;
+        loadSlide(currentIndex);
+      }
+    });
+
+    // Inicializa na tela do título
+    loadSlide(currentIndex);
+  </script>
+
+</body>
+</html>

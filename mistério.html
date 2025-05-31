@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Intro Misteriosa</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .intro-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url('fundo_misterioso.gif');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .text {
+      position: absolute;
+      font-size: 2rem;
+      text-align: center;
+      max-width: 80%;
+      opacity: 0;
+      animation: fadeInOut 4s ease-in-out forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateY(20px) scale(0.9); filter: blur(4px); }
+      25% { opacity: 1; transform: translateY(0px) scale(1); filter: blur(0); }
+      75% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-20px) scale(0.9); filter: blur(4px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="intro-container" id="intro">
+    <!-- Textos serão inseridos via JS -->
+  </div>
+
+  <script>
+    const textos = [
+      "O silêncio grita onde não há mais esperança.",
+      "Cada passo ecoa memórias esquecidas.",
+      "O vazio observa, esperando ser preenchido.",
+      "Nada é por acaso... nem mesmo isso.",
+      "Você está pronto para ver o que há por trás?",
+      "Clique para começar..."
+    ];
+
+    const container = document.getElementById('intro');
+
+    let i = 0;
+
+    function mostrarTexto() {
+      if (i >= textos.length) {
+        container.innerHTML = `<button onclick="window.location.href='apresentacao.html'" style="padding: 12px 24px; font-size: 1.2rem; border: none; background: darkred; color: white; cursor: pointer; border-radius: 10px;">Iniciar</button>`;
+        return;
+      }
+
+      const textoDiv = document.createElement('div');
+      textoDiv.className = 'text';
+      textoDiv.style.animationDelay = '0s';
+      textoDiv.innerText = textos[i];
+      container.appendChild(textoDiv);
+
+      setTimeout(() => {
+        textoDiv.remove();
+        i++;
+        mostrarTexto();
+      }, 4000);
+    }
+
+    window.onload = () => {
+      mostrarTexto();
+    };
+  </script>
+</body>
+</html>

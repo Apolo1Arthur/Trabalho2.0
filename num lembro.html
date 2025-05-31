@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Apresentação</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    #introScreen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url('st0.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: 10;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    #introScreen button {
+      padding: 20px 40px;
+      font-size: 1.8rem;
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid white;
+      border-radius: 20px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    #introScreen button:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
+    }
+
+    #slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tela de introdução -->
+  <div id="introScreen">
+    <button onclick="startPresentation()">Iniciar Apresentação</button>
+  </div>
+
+  <!-- Slide principal -->
+  <div id="slide"></div>
+
+  <!-- Áudio da música principal -->
+  <audio id="backgroundMusic" autoplay loop></audio>
+
+  <!-- Áudio do som de clique -->
+  <audio id="transitionSound" src="ip.wav"></audio>
+
+  <script>
+    let index = 0;
+    const totalSlides = 10; // Ajuste se tiver mais/menos slides
+
+    function startPresentation() {
+      document.getElementById("introScreen").style.display = "none";
+      showSlide(index);
+    }
+
+    function showSlide(i) {
+      const slide = document.getElementById("slide");
+      const bgMusic = document.getElementById("backgroundMusic");
+      const clickSound = document.getElementById("transitionSound");
+
+      // Nome dos arquivos conforme o padrão
+      const bgImage = `st${i}.jpg`;
+      const altImage = `st${i}.gif`;
+      const music = `musica${i}.mp3`;
+
+      // Tenta usar .jpg, se não existir tenta .gif
+      slide.style.backgroundImage = `url('${bgImage}')`;
+
+      // Toca som de clique
+      clickSound.currentTime = 0;
+      clickSound.play();
+
+      // Troca música
+      bgMusic.src = music;
+      bgMusic.play();
+
+      // Aguarda 10 segundos e avança
+      setTimeout(() => {
+        index++;
+        if (index < totalSlides) {
+          showSlide(index);
+        } else {
+          endPresentation();
+        }
+      }, 10000); // 10 segundos por slide
+    }
+
+    function endPresentation() {
+      const slide = document.getElementById("slide");
+      slide.style.backgroundImage = "url('fim.jpg')"; // Imagem final
+
+      const bgMusic = document.getElementById("backgroundMusic");
+      bgMusic.src = "musicaFinal.mp3"; // Música final, se desejar
+      bgMusic.play();
+    }
+  </script>
+</body>
+</html>
