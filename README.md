@@ -116,37 +116,37 @@ git remote add origin https://github.com/Apolo1Arthur/Trabalho2.0.git
       {
         img: 'stx.jpg',
         musica: 'musicax.mp3',
-        texto: `🌌 Introdução:\nSeja bem-vindo à jornada de uma mulher que não apenas viveu sua história, mas a reescreveu...`
+        texto: `🌌 Introdução:\nSeja bem-vindo à jornada de uma mulher que não apenas viveu sua história, mas a reescreveu com coragem, resiliência e alma. A cada capítulo, mergulharemos em uma fase da vida de Oprah Winfrey — da escuridão ao estrelato, da dor ao poder transformador da voz. Prepare-se para sentir, refletir e se inspirar.`
       },
       {
         img: 'st1.gif',
         musica: 'musica1.mp3',
-        texto: `🌱 Capítulo 1: As raízes\nOprah Gail Winfrey nasceu em 1954, em Kosciusko, Mississippi...`
+        texto: `🌱 Capítulo 1: As raízes\nOprah Gail Winfrey nasceu em 29 de janeiro de 1954, em Kosciusko, Mississippi. Filha de uma mãe adolescente solteira, viveu seus primeiros anos envolta pela pobreza extrema. Criada pela avó em uma fazenda sem água encanada, aprendeu a ler antes dos três anos e encantava a todos recitando versos da Bíblia na igreja. Desde cedo, mostrou-se uma alma velha em corpo de menina, carregando nos olhos curiosidade e sabedoria.`
       },
       {
         img: 'st2.gif',
         musica: 'musica2.mp3',
-        texto: `🌧️ Capítulo 2: A tempestade da infância\nA infância de Oprah foi marcada por dores profundas — abusos...`
+        texto: `🌧️ Capítulo 2: A tempestade da infância\nA infância de Oprah foi marcada por traumas profundos. Entre os 9 e os 14 anos, foi vítima de diversos abusos. Sentia-se invisível, como uma voz perdida em meio ao silêncio. Mas foi na educação que ela encontrou seu refúgio: livros tornaram-se portais para outros mundos, e a escrita, um grito de liberdade. Aos 14 anos, após engravidar e perder o filho, muitos pensaram que tudo acabaria ali. Mas ali começava sua metamorfose.`
       },
       {
         img: 'st3.gif',
         musica: 'musica3.mp3',
-        texto: `📺 Capítulo 3: A primeira luz na televisão\nAos 19 anos, Oprah estreou na televisão como repórter em Nashville...`
+        texto: `📺 Capítulo 3: A primeira luz na televisão\nDeterminada a vencer, Oprah conquistou uma bolsa de estudos, destacando-se na escola e na oratória. Aos 19 anos, tornou-se a primeira mulher negra a apresentar as notícias na TV de Nashville. Enfrentou racismo, machismo e dúvidas, mas sua empatia singular a tornou incomparável. Onde muitos liam scripts, ela enxergava histórias. Onde outros viam números, ela via almas.`
       },
       {
         img: 'st4.gif',
         musica: 'musica4.mp3',
-        texto: `🎤 Capítulo 4: O show que virou revolução\nEm 1986, nascia o "The Oprah Winfrey Show"...`
+        texto: `🎤 Capítulo 4: O show que virou revolução\nEm 1986, nascia o "The Oprah Winfrey Show". Não era apenas um talk show: era um espelho da sociedade. Oprah abordava temas tabus, chorava com os convidados, celebrava conquistas e enfrentava injustiças com ternura e firmeza. Sua presença transformou o programa em um ritual diário para milhões. Pela primeira vez, o sofrimento tinha palco — e escuta.`
       },
       {
         img: 'st5.gif',
         musica: 'musica5.mp3',
-        texto: `📚 Capítulo 5: Império de alma e propósito\nAo longo dos anos, Oprah se expandiu...`
+        texto: `📚 Capítulo 5: Império de alma e propósito\nOprah fundou sua própria produtora, Harpo, tornando-se uma das mulheres mais poderosas da mídia. Criou clubes de leitura, estrelou filmes, produziu séries e ergueu escolas na África. Sua fortuna cresceu, mas crescia mais sua missão de elevar consciências. Ela usou sua influência para empoderar, educar e inspirar gerações — um império construído não sobre tijolos, mas sobre valores.`
       },
       {
         img: 'st6.jpg',
         musica: 'musica6.mp3',
-        texto: `✨ Capítulo 6: O legado eterno\nHoje, Oprah Winfrey é mais que uma apresentadora...`
+        texto: `✨ Capítulo 6: O legado eterno\nHoje, Oprah é sinônimo de superação, compaixão e transformação. Seu legado ecoa em ações sociais, em jovens que acreditam no impossível, em mulheres que reencontram suas vozes. Ela mostrou que vulnerabilidade é força, e que histórias podem curar. A história de Oprah não termina — ela se reinventa, como toda grande alma que veio ao mundo para iluminar.`
       }
     ];
 
