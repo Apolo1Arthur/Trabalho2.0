@@ -1,20 +1,35 @@
+// Iniciar após clicar em "Iniciar"
+startBtn.addEventListener('click', () => {
+  currentIndex = 1;
+  updateSlide();
+});
+
+// Atualização de slide
 function updateSlide() {
   clickSound.play();
 
-  // Atualiza controles habilitados/desabilitados
+  // Botões
   prevBtn.disabled = currentIndex === 0;
   nextBtn.disabled = currentIndex === totalSlides - 1;
 
-  // Atualiza imagem de fundo
-  slideDiv.style.backgroundImage = imagens[currentIndex] ? `url(${imagens[currentIndex]})` : '';
-  slideDiv.style.animation = animacoesFundo[currentIndex] || 'none';
+  // Título
+  if (currentIndex === 0) {
+    slideDiv.style.backgroundImage = 'none';
+    textBox.style.opacity = 0;
+    titleIntro.style.display = 'flex';
+    playBackgroundMusic(0);
+    return;
+  } else {
+    titleIntro.style.display = 'none';
+  }
 
-  // Atualiza texto
-  textBox.innerText = textos[currentIndex] || '';
-  textBox.style.animation = animacoesTexto[currentIndex] || 'none';
+  slideDiv.style.animation = animacoesFundo[currentIndex - 1] || '';
+  slideDiv.style.backgroundImage = `url(${imagens[currentIndex]})`;
+
+  textBox.innerHTML = textos[currentIndex];
+  textBox.style.animation = animacoesTexto[currentIndex - 1] || '';
   textBox.style.opacity = 1;
 
-  // Atualiza música
   playBackgroundMusic(currentIndex);
 }
 
@@ -32,11 +47,3 @@ nextBtn.addEventListener('click', () => {
     updateSlide();
   }
 });
-
-// Inicia com o slide de introdução
-window.onload = () => {
-  setTimeout(() => {
-    titleIntro.style.display = 'none';
-    updateSlide();
-  }, 3500); // tempo da animação do título
-};
