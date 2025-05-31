@@ -6,150 +6,165 @@ git branch -M main
 git remote add origin https://github.com/Apolo1Arthur/Trabalho2.0.git
  git push -u origin main
 
-       <!DOCTYPE html><html lang="pt-BR">
+       <!DOCTYPE html>
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oprah Winfrey - Superação e Sucesso</title>
+  <title>Apresentação Oprah Winfrey</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      color: white;
-      overflow: hidden;
-    }
-    .screen {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
+      font-family: 'Arial', sans-serif;
       height: 100vh;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 2rem;
+      overflow: hidden;
       background-size: cover;
       background-position: center;
-      animation: fadeIn 1.2s ease-in-out;
-    }
-    .active {
-      display: flex;
-    }
-    button {
-      margin-top: 2rem;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      background: rgba(255, 255, 255, 0.2);
       color: white;
-      border: 2px solid white;
-      border-radius: 12px;
+      text-shadow: 2px 2px 5px black;
+      transition: background-image 1s ease-in-out;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 30px;
+      background-color: rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1s ease-in;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: popIn 1s ease-in-out;
+    }
+
+    p {
+      font-size: 1.5rem;
+      max-width: 800px;
+      margin-bottom: 20px;
+      animation: slideIn 1s ease-in-out;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      margin-top: 20px;
       cursor: pointer;
-      transition: all 0.4s ease;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(to right, #ff6a00, #ee0979);
+      color: white;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s, background 0.5s;
+      animation: pulse 2s infinite;
     }
+
     button:hover {
-      transform: scale(1.1);
-      background: white;
-      color: black;
+      transform: scale(1.05);
+      background: linear-gradient(to right, #ee0979, #ff6a00);
     }
-    h1, p {
-      margin-bottom: 1rem;
-      animation: floatIn 1.4s ease forwards;
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
     }
-    .sparkle {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: white;
-      border-radius: 50%;
-      pointer-events: none;
-      animation: sparkleMove 2s infinite;
-    }@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
 
-@keyframes floatIn {
-  from { transform: translateY(50px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
+    @keyframes popIn {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
 
-@keyframes sparkleMove {
-  0% { transform: scale(1) translateY(0); opacity: 1; }
-  100% { transform: scale(0.3) translateY(-200px); opacity: 0; }
-}
+    @keyframes slideIn {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
 
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
   </style>
 </head>
-<body>
-  <audio id="clickSound" src="ip.wav"></audio>
-  <audio id="musicPlayer" loop></audio>  <div id="screen0" class="screen active" style="background-image: url('st0.jpg');">
-    <h1>Bem-vindo à Jornada de Oprah Winfrey</h1>
-    <p>Clique para começar a descobrir essa história inspiradora.</p>
-    <button onclick="nextScreen(1)">Iniciar</button>
-  </div>  <div id="screen1" class="screen" style="background-image: url('st1.gif');">
-    <h1>Introdução</h1>
-    <p>Oprah Winfrey é um exemplo de superação e sucesso. De uma infância pobre ao estrelato mundial.</p>
-    <button onclick="nextScreen(2)">Próximo</button>
-  </div>  <div id="screen2" class="screen" style="background-image: url('st2.gif');">
-    <h1>Infância e Dificuldades</h1>
-    <p>Ela nasceu em uma área rural no Mississippi e enfrentou pobreza extrema e abusos na infância.</p>
-    <button onclick="nextScreen(3)">Próximo</button>
-  </div>  <div id="screen3" class="screen" style="background-image: url('st3.gif');">
-    <h1>O Início da Carreira</h1>
-    <p>Começou como apresentadora de rádio aos 17 anos e logo se destacou por sua empatia e voz forte.</p>
-    <button onclick="nextScreen(4)">Próximo</button>
-  </div>  <div id="screen4" class="screen" style="background-image: url('st4.gif');">
-    <h1>O Sucesso</h1>
-    <p>Apresentando o programa "The Oprah Winfrey Show", se tornou uma das mulheres mais influentes do mundo.</p>
-    <button onclick="nextScreen(5)">Próximo</button>
-  </div>  <div id="screen5" class="screen" style="background-image: url('st5.gif');">
-    <h1>Legado</h1>
-    <p>Além da televisão, Oprah se tornou uma empresária, filantropa e inspiração global.</p>
-    <button onclick="nextScreen(6)">Finalizar</button>
-  </div>  <div id="screen6" class="screen" style="background-image: url('st6.jpg');">
-    <h1>Obrigado por assistir!</h1>
-    <p>Esperamos que a trajetória de Oprah inspire você a nunca desistir dos seus sonhos.</p>
-  </div>  <script>
-    const sounds = ["musica1.mp3", "musica2.mp3", "musica3.mp3", "musica4.mp3", "musica5.mp3", "musica6.mp3"];
-    let currentScreen = 0;
+<body style="background-image: url('st0.jpg');">
+  <div class="container" id="content">
+    <h1>Apresentação Interativa</h1>
+    <p>Bem-vindo! Clique para iniciar a jornada inspiradora de Oprah Winfrey.</p>
+    <button onclick="nextSlide()">Iniciar</button>
+  </div>
 
-    function nextScreen(index) {
-      document.getElementById("clickSound").play();
-      document.getElementById(`screen${currentScreen}`).classList.remove("active");
-      document.getElementById(`screen${index}`).classList.add("active");
-      document.getElementById("musicPlayer").src = sounds[index - 1] || "";
-      document.getElementById("musicPlayer").play();
-      currentScreen = index;
-      generateSparkle();
-    }
+  <audio id="bgMusic" loop></audio>
+  <audio id="transitionSound" src="ip.wav"></audio>
 
-    function generateSparkle() {
-      for (let i = 0; i < 10; i++) {
-        const sparkle = document.createElement("div");
-        sparkle.className = "sparkle";
-        sparkle.style.left = Math.random() * window.innerWidth + 'px';
-        sparkle.style.top = Math.random() * window.innerHeight + 'px';
-        sparkle.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 70%)`;
-        document.body.appendChild(sparkle);
-        setTimeout(() => sparkle.remove(), 2000);
+  <script>
+    const slides = [
+      {
+        bg: "st1.gif",
+        text: "Introdução: Oprah Winfrey é um dos maiores exemplos de superação e sucesso. De uma infância pobre ao topo da mídia mundial.",
+        music: "musica.mp3"
+      },
+      {
+        bg: "st2.gif",
+        text: "Infância difícil: Nasceu em uma família pobre nos EUA. Sofreu abuso, fome e dificuldades escolares, mas nunca desistiu.",
+        music: "musica1.mp3"
+      },
+      {
+        bg: "st3.gif",
+        text: "Início da carreira: Aos 19 anos começou como apresentadora de rádio. Sua empatia a tornou rapidamente querida.",
+        music: "musica.mp3"
+      },
+      {
+        bg: "st4.gif",
+        text: "Ascensão: Criou o The Oprah Winfrey Show, revolucionando o talk show americano e se tornando uma referência mundial.",
+        music: "musica1.mp3"
+      },
+      {
+        bg: "st5.gif",
+        text: "Empreendedora: Fundou sua própria produtora e canal, tornando-se a primeira mulher negra bilionária dos EUA.",
+        music: "musica.mp3"
+      },
+      {
+        bg: "st6.jpg",
+        text: "Legado: Além do sucesso financeiro, Oprah é símbolo de inspiração, filantropia e voz ativa por igualdade.",
+        music: "musica1.mp3"
       }
-    }
+    ];
 
-    setInterval(() => {
-      if (document.querySelector(`.screen.active`)) {
-        const randomEffect = document.createElement("div");
-        randomEffect.className = "sparkle";
-        randomEffect.style.left = Math.random() * window.innerWidth + 'px';
-        randomEffect.style.top = Math.random() * window.innerHeight + 'px';
-        document.body.appendChild(randomEffect);
-        setTimeout(() => randomEffect.remove(), 2000);
-      }
-    }, 5000);
-  </script></body>
+    let index = 0;
+
+    function nextSlide() {
+      if (index >= slides.length) return;
+
+      const slide = slides[index];
+      document.body.style.backgroundImage = `url('${slide.bg}')`;
+
+      const container = document.getElementById("content");
+      container.innerHTML = `
+        <h1>Oprah Winfrey</h1>
+        <p>${slide.text}</p>
+        <button onclick="nextSlide()">Continuar</button>
+      `;
+
+      // Efeito sonoro de transição
+      const sound = document.getElementById("transitionSound");
+      sound.currentTime = 0;
+      sound.play();
+
+      // Música de fundo
+      const music = document.getElementById("bgMusic");
+      music.src = slide.music;
+      music.play();
+
+      index++;
+    }
+  </script>
+</body>
 </html>
