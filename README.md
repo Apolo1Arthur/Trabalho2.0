@@ -11,260 +11,250 @@ git remote add origin https://github.com/Apolo1Arthur/Trabalho2.0.git
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>Apresentação Oprah Winfrey - Versão Turbinada</title>
+  <title>Apresentação Oprah Winfrey com Capítulos e Animação</title>
   <style>
     * {
-      margin: 0; padding: 0; box-sizing: border-box;
+      margin:0; padding:0; box-sizing:border-box;
     }
-    body {
+    body, html {
+      height: 100%;
       font-family: 'Arial', sans-serif;
-      height: 100vh;
-      overflow: hidden;
       background-size: cover;
       background-position: center;
       color: white;
       text-shadow: 2px 2px 7px black;
-      transition: background-image 1s ease-in-out;
       display: flex;
       justify-content: center;
       align-items: center;
+      transition: background-image 1s ease-in-out;
       background-image: url('st0.jpg');
-    }
-    #container {
-      background-color: rgba(0,0,0,0.45);
-      padding: 40px 50px;
-      border-radius: 20px;
-      max-width: 800px;
-      text-align: center;
-      min-height: 280px;
-      position: relative;
+      user-select: none;
       overflow: hidden;
+      position: relative;
     }
 
+    #wrapper {
+      display: flex;
+      width: 90%;
+      max-width: 1000px;
+      min-height: 400px;
+      background-color: rgba(0,0,0,0.6);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(0,0,0,0.7);
+      position: relative;
+      z-index: 1;
+    }
+
+    #container {
+      flex: 1 1 auto;
+      padding: 30px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
     h1 {
-      font-size: 3rem;
+      font-size: 2.8rem;
       margin-bottom: 20px;
-      animation-duration: 1.2s;
-      animation-fill-mode: forwards;
-      opacity: 0;
     }
-
     p {
-      font-size: 1.5rem;
-      margin-bottom: 25px;
-      max-width: 750px;
-      animation-duration: 1.2s;
-      animation-fill-mode: forwards;
-      opacity: 0;
-    }
-
-    button {
-      padding: 14px 28px;
       font-size: 1.3rem;
-      border-radius: 14px;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+    #controls {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    button {
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      border-radius: 12px;
       border: none;
       cursor: pointer;
       background: linear-gradient(45deg, #ff6a00, #ee0979);
       color: white;
       box-shadow: 0 5px 20px rgba(238, 9, 121, 0.6);
-      transition: transform 0.3s ease, background 0.4s ease;
-      position: relative;
-      animation: btnPulse 2.5s infinite;
+      transition: transform 0.25s ease, background 0.3s ease;
       user-select: none;
     }
-    button:hover {
+    button:hover:not(:disabled) {
       background: linear-gradient(45deg, #ee0979, #ff6a00);
-      transform: scale(1.1);
+      transform: scale(1.05);
       box-shadow: 0 8px 30px rgba(255, 106, 0, 0.8);
     }
+    button:disabled {
+      cursor: default;
+      background: gray;
+      box-shadow: none;
+      transform: none;
+      opacity: 0.6;
+    }
 
-    /* Animações do texto - diferentes por slide */
-    @keyframes fadeUp {
-      0% {opacity: 0; transform: translateY(20px);}
-      100% {opacity: 1; transform: translateY(0);}
+    /* Barra lateral de capítulos */
+    #chapters {
+      width: 280px;
+      background: rgba(0,0,0,0.85);
+      overflow-y: auto;
+      border-left: 2px solid #ee0979;
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      position: relative;
+      z-index: 2;
     }
-    @keyframes glowText {
-      0%, 100% { text-shadow: 0 0 10px #ff6a00, 0 0 20px #ee0979; opacity:1; }
-      50% { text-shadow: 0 0 20px #ffb347, 0 0 30px #ff4500; opacity:0.8;}
+    #chapters h2 {
+      font-size: 1.6rem;
+      text-align: center;
+      margin-bottom: 15px;
+      color: #ff6a00;
+      user-select: none;
     }
+    .chapter-btn {
+      background: transparent;
+      border: 2px solid #ee0979;
+      color: white;
+      font-size: 1rem;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      border-radius: 10px;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+    .chapter-btn:hover {
+      background: #ff6a00;
+      color: black;
+      border-color: #ff6a00;
+    }
+    .chapter-btn.active {
+      background: #ee0979;
+      color: white;
+      border-color: #ee0979;
+      cursor: default;
+      font-weight: bold;
+    }
+
+    /* Scroll custom */
+    #chapters::-webkit-scrollbar {
+      width: 8px;
+    }
+    #chapters::-webkit-scrollbar-thumb {
+      background: #ee0979;
+      border-radius: 4px;
+    }
+    #chapters::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      #wrapper {
+        flex-direction: column;
+        max-width: 95%;
+        min-height: 600px;
+      }
+      #chapters {
+        width: 100%;
+        border-left: none;
+        border-top: 2px solid #ee0979;
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-height: 120px;
+        overflow-x: auto;
+        padding: 10px 5px;
+        gap: 8px;
+      }
+      .chapter-btn {
+        flex: 1 1 auto;
+        margin-bottom: 0;
+        text-align: center;
+        font-size: 0.9rem;
+        padding: 8px 6px;
+      }
+      #container {
+        padding: 20px 25px;
+      }
+    }
+
+    /* Animação da fumaça */
+    .smoke {
+      position: fixed;
+      pointer-events: none;
+      width: 150px;
+      height: 150px;
+      background: url('https://i.imgur.com/3xGlcU8.png') no-repeat center/contain; /* fumaça PNG com fundo transparente */
+      opacity: 0;
+      animation: smokeFade 6s ease forwards;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+      z-index: 3;
+      user-select: none;
+    }
+
     @keyframes smokeFade {
-      0% {opacity: 0; filter: blur(8px) grayscale(40%);}
-      100% {opacity: 1; filter: blur(0) grayscale(0);}
+      0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(20px);
+      }
+      20% {
+        opacity: 0.6;
+        transform: scale(1) translateY(0);
+      }
+      80% {
+        opacity: 0.6;
+        transform: scale(1) translateY(-20px);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.3) translateY(-40px);
+      }
     }
-    @keyframes meltText {
-      0% {opacity:1; transform: translateY(0);}
-      100% {opacity:0; transform: translateY(40px) skewX(15deg);}
-    }
-    @keyframes tremor {
-      0%, 100% {transform: translate(0,0);}
-      20% {transform: translate(-2px,2px);}
-      40% {transform: translate(2px,-2px);}
-      60% {transform: translate(-1px,1px);}
-      80% {transform: translate(1px,-1px);}
-    }
-    @keyframes btnPulse {
-      0%,100% {transform: scale(1);}
-      50% {transform: scale(1.05);}
-    }
-
-    /* Contêiner que fará transição com efeito explodir/fade */
-    .fade-out {
-      animation: fadeOutExplode 0.7s forwards;
-    }
-    @keyframes fadeOutExplode {
-      0% {opacity: 1; transform: scale(1);}
-      100% {opacity: 0; transform: scale(1.4) rotate(20deg);}
-    }
-    .fade-in {
-      animation: fadeInAppear 1s forwards;
-    }
-    @keyframes fadeInAppear {
-      0% {opacity: 0; transform: scale(0.85);}
-      100% {opacity: 1; transform: scale(1);}
-    }
-
   </style>
 </head>
 <body>
-  <div id="container">
-    <h1 id="title">Apresentação Interativa</h1>
-    <p id="text">Bem-vindo! Clique para iniciar a jornada inspiradora de Oprah Winfrey.</p>
-    <button id="btn">Iniciar</button>
+
+  <div id="wrapper">
+    <div id="container">
+      <h1 id="title">Apresentação Interativa</h1>
+      <p id="text">Clique em Iniciar para começar a apresentação inspiradora de Oprah Winfrey.</p>
+      <div id="controls">
+        <button id="btnStart">Iniciar</button>
+        <button id="btnBack" disabled>Voltar</button>
+        <button id="btnNext" disabled>Próximo</button>
+      </div>
+    </div>
+
+    <div id="chapters">
+      <h2>Capítulos</h2>
+      <!-- Botões serão gerados aqui pelo JS -->
+    </div>
   </div>
 
-  <audio id="bgMusic" loop></audio>
-  <audio id="transitionSound"></audio>
-  <audio id="clickSound" src="click.wav"></audio>
+<script>
+  const slides = [
+    { bg: "st1.gif", title: "Introdução", text: "Oprah Winfrey é um dos maiores exemplos de superação e sucesso. De uma infância pobre ao topo da mídia mundial." },
+    { bg: "st2.gif", title: "Infância Difícil", text: "Nasceu em uma família pobre nos EUA. Sofreu abuso, fome e dificuldades escolares, mas nunca desistiu." },
+    { bg: "st3.gif", title: "Início da Carreira", text: "Aos 19 anos começou como apresentadora de rádio. Sua empatia a tornou rapidamente querida." },
+    { bg: "st4.gif", title: "Ascensão", text: "Criou o The Oprah Winfrey Show, revolucionando o talk show americano e se tornando uma referência mundial." },
+    { bg: "st5.gif", title: "Empreendedora", text: "Fundou sua própria produtora e canal, tornando-se a primeira mulher negra bilionária dos EUA." },
+    { bg: "st6.jpg", title: "Legado", text: "Além do sucesso financeiro, Oprah é símbolo de inspiração, filantropia e voz ativa por igualdade." }
+  ];
 
-  <script>
-    const slides = [
-      {
-        bg: "st1.gif",
-        text: "Introdução: Oprah Winfrey é um dos maiores exemplos de superação e sucesso. De uma infância pobre ao topo da mídia mundial.",
-        music: "musica.mp3",
-        effect: "glowText",
-        transitionEffect: "fadeOutExplode",
-        clickSound: "click.wav"
-      },
-      {
-        bg: "st2.gif",
-        text: "Infância difícil: Nasceu em uma família pobre nos EUA. Sofreu abuso, fome e dificuldades escolares, mas nunca desistiu.",
-        music: "musica1.mp3",
-        effect: "smokeFade",
-        transitionEffect: "fadeOutExplode",
-        clickSound: "click2.wav"
-      },
-      {
-        bg: "st3.gif",
-        text: "Início da carreira: Aos 19 anos começou como apresentadora de rádio. Sua empatia a tornou rapidamente querida.",
-        music: "musica.mp3",
-        effect: "fadeUp",
-        transitionEffect: "fadeOutExplode",
-        clickSound: "click.wav"
-      },
-      {
-        bg: "st4.gif",
-        text: "Ascensão: Criou o The Oprah Winfrey Show, revolucionando o talk show americano e se tornando uma referência mundial.",
-        music: "musica1.mp3",
-        effect: "tremor",
-        transitionEffect: "fadeOutExplode",
-        clickSound: "click3.wav"
-      },
-      {
-        bg: "st5.gif",
-        text: "Empreendedora: Fundou sua própria produtora e canal, tornando-se a primeira mulher negra bilionária dos EUA.",
-        music: "musica.mp3",
-        effect: "meltText",
-        transitionEffect: "fadeOutExplode",
-        clickSound: "click.wav"
-      },
-      {
-        bg: "st6.jpg",
-        text: "Legado: Além do sucesso financeiro, Oprah é símbolo de inspiração, filantropia e voz ativa por igualdade.",
-        music: "musica1.mp3",
-        effect: "glowText",
-        transitionEffect: "fadeOutExplode",
-        clickSound: "click2.wav"
-      }
-    ];
+  const container = document.getElementById('container');
+  const titleEl = document.getElementById('title');
+  const textEl = document.getElementById('text');
+  const btnStart = document.getElementById('btnStart');
+  const btnBack = document.getElementById('btnBack');
+  const btnNext = document.getElementById('btnNext');
+  const chaptersDiv = document.getElementById('chapters');
 
-    const container = document.getElementById("container");
-    const title = document.getElementById("title");
-    const text = document.getElementById("text");
-    const btn = document.getElementById("btn");
-    const bgMusic = document.getElementById("bgMusic");
-    const transitionSound = document.getElementById("transitionSound");
-    const clickSound = document.getElementById("clickSound");
+  let currentIndex = -1;
 
-    let index = 0;
-
-    // Função para trocar música com fade out e fade in
-    function changeMusic(newSrc) {
-      if (bgMusic.src.includes(newSrc)) return; // mesma música, não troca
-      let vol = 1;
-      const fadeOutInterval = setInterval(() => {
-        vol -= 0.1;
-        if (vol <= 0) {
-          clearInterval(fadeOutInterval);
-          bgMusic.src = newSrc;
-          bgMusic.play();
-          const fadeInInterval = setInterval(() => {
-            vol += 0.1;
-            if (vol >= 1) {
-              clearInterval(fadeInInterval);
-            }
-            bgMusic.volume = vol;
-          }, 100);
-        }
-        bgMusic.volume = vol;
-      }, 100);
-    }
-
-    function playTransitionSound(src) {
-      transitionSound.src = src;
-      transitionSound.currentTime = 0;
-      transitionSound.play();
-    }
-
-    function playClickSound(src) {
-      clickSound.src = src;
-      clickSound.currentTime = 0;
-      clickSound.play();
-    }
-
-    function applyEffect(effectName, element) {
-      // Remove animações anteriores
-      element.style.animation = 'none';
-      void element.offsetWidth; // trigger reflow
-      element.style.animation = effectName + ' 1.2s ease forwards';
-    }
-
-    function nextSlide() {
-      if (index >= slides.length) return;
-
-      playClickSound(slides[index].clickSound);
-      container.classList.add('fade-out');
-
-      // Ao terminar a animação fade-out, troca conteúdo e inicia fade-in
-      container.addEventListener('animationend', () => {
-        container.classList.remove('fade-out');
-        container.classList.add('fade-in');
-
-        const slide = slides[index];
-        document.body.style.backgroundImage = `url('${slide.bg}')`;
-        title.textContent = "Oprah Winfrey";
-        text.textContent = slide.text;
-        btn.textContent = index === slides.length - 1 ? "Finalizar" : "Continuar";
-
-        applyEffect(slide.effect, text);
-        applyEffect(slide.effect, title);
-
-        changeMusic(slide.music);
-        playTransitionSound("ip.wav");
-
-        index++;
-
-        container.addEventListener('animationend', () => {
-          container.classList.remove('fade-in');
-        }, { once: true });
-      },
+  // Cria os botões dos capítulos
+  function criarBotoesCapitulos() {
+    const oldBtns = chaptersDiv.querySelectorAll('.chapter-btn');
+    oldBtns.forEach(btn => btn.remove());
