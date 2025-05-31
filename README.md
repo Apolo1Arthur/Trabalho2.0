@@ -6,8 +6,6 @@ git branch -M main
 git remote add origin https://github.com/Apolo1Arthur/Trabalho2.0.git
  git push -u origin main
 
-
-
 <!DOCTYPE html><html lang="pt-br">
 <head>
 <meta charset="UTF-8" />
