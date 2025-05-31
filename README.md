@@ -6,12 +6,13 @@ git branch -M main
 git remote add origin https://github.com/Apolo1Arthur/Trabalho2.0.git
  git push -u origin main
 
-<!DOCTYPE html>
-<html lang="pt-br">
+
+
+<!DOCTYPE html><html lang="pt-br">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Opera In Frame - Animação Completa</title>
+<title>Oprah Winfrey - Animação Completa</title>
 <style>
   /* Reset e base */
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -95,46 +96,18 @@ git remote add origin https://github.com/Apolo1Arthur/Trabalho2.0.git
     0%, 100% { transform: scale(1); box-shadow: 0 0 8px rgba(255,255,255,0.4); }
     50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(255,255,255,0.8); }
   }
-  #prevBtn:enabled { animation: pulse 2.5s ease-in-out infinite; }
+  #prevBtn:enabled { animation: pulse 2.5s ease-in-out infinite; }@keyframes spinGlow { 0% { transform: rotate(0deg); box-shadow: 0 0 5px rgba(255,255,255,0.5); } 50% { transform: rotate(10deg); box-shadow: 0 0 20px rgba(255,255,255,1); } 100% { transform: rotate(0deg); box-shadow: 0 0 5px rgba(255,255,255,0.5); } } #nextBtn:enabled { animation: spinGlow 3s ease-in-out infinite; }
 
-  @keyframes spinGlow {
-    0% { transform: rotate(0deg); box-shadow: 0 0 5px rgba(255,255,255,0.5); }
-    50% { transform: rotate(10deg); box-shadow: 0 0 20px rgba(255,255,255,1); }
-    100% { transform: rotate(0deg); box-shadow: 0 0 5px rgba(255,255,255,0.5); }
-  }
-  #nextBtn:enabled { animation: spinGlow 3s ease-in-out infinite; }
+/* Animações fundo */ @keyframes slideFadeZoomIn { 0% {opacity: 0; transform: scale(1.2);} 100% {opacity: 1; transform: scale(1);} } @keyframes slideBlurIn { 0% {filter: blur(15px); opacity: 0;} 100% {filter: blur(0); opacity: 1;} } @keyframes slideSlideFromLeft { 0% {opacity: 0; transform: translateX(-100%);} 100% {opacity: 1; transform: translateX(0);} } @keyframes slideRotateIn { 0% {opacity: 0; transform: rotate(-15deg) scale(0.8);} 100% {opacity: 1; transform: rotate(0) scale(1);} } @keyframes slideZoomInOut { 0% {opacity: 0; transform: scale(0);} 50% {opacity: 1; transform: scale(1.1);} 100% {opacity: 1; transform: scale(1);} } @keyframes slideSlideFromBottom { 0% {opacity: 0; transform: translateY(100%);} 100% {opacity: 1; transform: translateY(0);} }
 
-  /* Animações fundo */
-  @keyframes slideFadeZoomIn { 0% {opacity: 0; transform: scale(1.2);} 100% {opacity: 1; transform: scale(1);} }
-  @keyframes slideBlurIn { 0% {filter: blur(15px); opacity: 0;} 100% {filter: blur(0); opacity: 1;} }
-  @keyframes slideSlideFromLeft { 0% {opacity: 0; transform: translateX(-100%);} 100% {opacity: 1; transform: translateX(0);} }
-  @keyframes slideRotateIn { 0% {opacity: 0; transform: rotate(-15deg) scale(0.8);} 100% {opacity: 1; transform: rotate(0) scale(1);} }
-  @keyframes slideZoomInOut { 0% {opacity: 0; transform: scale(0);} 50% {opacity: 1; transform: scale(1.1);} 100% {opacity: 1; transform: scale(1);} }
-  @keyframes slideSlideFromBottom { 0% {opacity: 0; transform: translateY(100%);} 100% {opacity: 1; transform: translateY(0);} }
+/* Animações texto */ @keyframes textFadeIn { 0% {opacity: 0;} 100% {opacity: 1;} } @keyframes textSlideFromRight { 0% {opacity: 0; transform: translateX(100%);} 100% {opacity: 1; transform: translateX(0);} } @keyframes textZoomIn { 0% {opacity: 0; transform: scale(0);} 100% {opacity: 1; transform: scale(1);} } @keyframes textRotateIn { 0% {opacity: 0; transform: rotate(15deg);} 100% {opacity: 1; transform: rotate(0);} } @keyframes textSlideFromTop { 0% {opacity: 0; transform: translateY(-100%);} 100% {opacity: 1; transform: translateY(0);} } @keyframes textBlink { 0%, 100% {opacity: 0;} 50% {opacity: 1;} } </style>
 
-  /* Animações texto */
-  @keyframes textFadeIn { 0% {opacity: 0;} 100% {opacity: 1;} }
-  @keyframes textSlideFromRight { 0% {opacity: 0; transform: translateX(100%);} 100% {opacity: 1; transform: translateX(0);} }
-  @keyframes textZoomIn { 0% {opacity: 0; transform: scale(0);} 100% {opacity: 1; transform: scale(1);} }
-  @keyframes textRotateIn { 0% {opacity: 0; transform: rotate(15deg);} 100% {opacity: 1; transform: rotate(0);} }
-  @keyframes textSlideFromTop { 0% {opacity: 0; transform: translateY(-100%);} 100% {opacity: 1; transform: translateY(0);} }
-  @keyframes textBlink { 0%, 100% {opacity: 0;} 50% {opacity: 1;} }
-</style>
 </head>
-<body>
-
-<div id="slide"></div>
-<div id="textBox"></div>
-
-<div id="controls">
+<body><div id="slide"></div>
+<div id="textBox"></div><div id="controls">
   <button id="prevBtn" disabled>Anterior</button>
   <button id="nextBtn">Próximo</button>
-</div>
-
-<div id="titleIntro">História da Opera In Frame</div>
-
-<audio id="backgroundMusic" autoplay loop></audio>
-<audio id="clickSound" src="ip.wav"></audio>
+</div><div id="titleIntro">História de Oprah Winfrey</div><audio id="backgroundMusic" autoplay loop></audio> <audio id="clickSound" src="ip.wav"></audio>
 
 <script>
   const totalSlides = 7;
@@ -150,12 +123,12 @@ git remote add origin https://github.com/Apolo1Arthur/Trabalho2.0.git
 
   const textos = [
     '',
-    'Capítulo 1: Introdução da história da Opera In Frame...',
-    'Capítulo 2: Segredos ocultos emergem entre os protagonistas...',
-    'Capítulo 3: Conflitos internos e motivações profundas...',
-    'Capítulo 4: Verdades vêm à tona e alianças são testadas...',
-    'Capítulo 5: Confrontos e emoções à flor da pele...',
-    'Capítulo 6: Conclusão reflexiva e emocionante...'
+    'Capítulo 1: O nascimento de Oprah Winfrey em circunstâncias desafiadoras...'
+    , 'Capítulo 2: A infância marcada por dificuldades e perseverança...'
+    , 'Capítulo 3: Os primeiros passos na televisão e o talento nato...'
+    , 'Capítulo 4: O sucesso estrondoso de seu talk show e o impacto na cultura...'
+    , 'Capítulo 5: Envolvimento em causas sociais e empoderamento feminino...'
+    , 'Capítulo 6: Legado de inspiração e transformação de vidas...'
   ];
 
   const imagens = [
@@ -232,7 +205,5 @@ git remote add origin https://github.com/Apolo1Arthur/Trabalho2.0.git
   });
 
   updateSlide();
-</script>
-</body>
+</script></body>
 </html>
-
