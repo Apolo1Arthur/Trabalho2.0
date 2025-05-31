@@ -8,17 +8,20 @@ git remote add origin https://github.com/Apolo1Arthur/Trabalho2.0.git
 
 
     
-      <!DOCTYPE html><html lang="pt-br">
+              <!DOCTYPE html>
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>História de Oprah Winfrey</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
     html, body {
       width: 100%; height: 100%;
       background-color: black;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       color: white;
       overflow: hidden;
     }
@@ -33,23 +36,22 @@ git remote add origin https://github.com/Apolo1Arthur/Trabalho2.0.git
       align-items: center;
       padding: 40px;
       animation-fill-mode: forwards;
-      transition: background-image 1s ease-in-out;
     }
     #textBox {
       max-width: 90%;
       background-color: rgba(0, 0, 0, 0.6);
       border-radius: 15px;
       padding: 20px;
-      font-size: 1.4rem;
-      line-height: 1.7;
+      font-size: 1.5rem;
+      line-height: 1.6;
       text-align: center;
       margin-bottom: 40px;
+      backdrop-filter: blur(4px);
       animation: aparecerTexto 2s ease forwards;
-      opacity: 0;
     }
     @keyframes aparecerTexto {
-      0% { transform: translateY(30px); opacity: 0; filter: blur(5px); }
-      100% { transform: translateY(0); opacity: 1; filter: blur(0); }
+      0% { transform: scale(0.8); opacity: 0; filter: blur(4px); }
+      100% { transform: scale(1); opacity: 1; filter: blur(0); }
     }
     #controls {
       position: fixed;
@@ -76,77 +78,107 @@ git remote add origin https://github.com/Apolo1Arthur/Trabalho2.0.git
       opacity: 0.4;
       cursor: default;
     }
+
+    /* Estilo da introdução com vídeo */
     #intro {
       position: absolute;
       inset: 0;
+      z-index: 20;
+      overflow: hidden;
+    }
+    #introVideo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    #introOverlay {
+      position: relative;
+      z-index: 1;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: url('st0.jpg') center/cover no-repeat;
-      z-index: 20;
-      flex-direction: column;
-      background-color: black;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
     }
-    #intro h1 {
+    #introOverlay h1 {
       font-size: 3rem;
       margin-bottom: 20px;
       background-color: rgba(0, 0, 0, 0.6);
       padding: 20px;
       border-radius: 15px;
     }
-    #intro button {
+    #introOverlay button {
       font-size: 1.3rem;
     }
   </style>
 </head>
 <body>
+
+  <!-- INTRODUÇÃO COM VÍDEO -->
   <div id="intro">
-    <h1>História de Oprah Winfrey</h1>
-    <button onclick="iniciar()">Iniciar</button>
+    <video autoplay loop muted playsinline id="introVideo">
+      <source src="intro.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo em HTML5.
+    </video>
+    <div id="introOverlay">
+      <h1>História de Oprah Winfrey</h1>
+      <button onclick="iniciar()">Iniciar</button>
+    </div>
   </div>
+
+  <!-- SLIDE PRINCIPAL -->
   <div id="slide"></div>
   <div id="textBox"></div>
+
+  <!-- CONTROLES -->
   <div id="controls">
-    <button onclick="irParaSlide(0)">Início</button>
     <button id="prevBtn" onclick="mudarSlide(-1)">Anterior</button>
     <button id="nextBtn" onclick="mudarSlide(1)">Próximo</button>
   </div>
-  <audio id="bgMusic" loop autoplay></audio>  <script>
+
+  <!-- MÚSICA DE FUNDO -->
+  <audio id="bgMusic" loop autoplay></audio>
+
+  <script>
     const slides = [
-      {
-        img: 'stx.jpg',
-        musica: 'musicax.mp3',
-        texto: `🌌 Introdução:\nSeja bem-vindo à jornada de uma mulher que não apenas viveu sua história, mas a reescreveu com coragem, resiliência e alma. A cada capítulo, mergulharemos em uma fase da vida de Oprah Winfrey — da escuridão ao estrelato, da dor ao poder transformador da voz. Prepare-se para sentir, refletir e se inspirar.`
-      },
       {
         img: 'st1.gif',
         musica: 'musica1.mp3',
-        texto: `🌱 Capítulo 1: As raízes\nOprah Gail Winfrey nasceu em 29 de janeiro de 1954, em Kosciusko, Mississippi. Filha de uma mãe adolescente solteira, viveu seus primeiros anos envolta pela pobreza extrema. Criada pela avó em uma fazenda sem água encanada, aprendeu a ler antes dos três anos e encantava a todos recitando versos da Bíblia na igreja. Desde cedo, mostrou-se uma alma velha em corpo de menina, carregando nos olhos curiosidade e sabedoria.`
+        texto: `Capítulo 1: O Nascimento\n
+Oprah Gail Winfrey nasceu em 29 de janeiro de 1954, em Kosciusko, Mississippi, em meio à pobreza rural e às estruturas raciais do sul dos EUA. Criada por sua avó até os seis anos, vivia em uma casa simples sem encanamento interno. Desde pequena, mostrou sinais de um intelecto aguçado e uma força interior notável. Enquanto outras crianças brincavam, Oprah lia a Bíblia em voz alta e contava histórias para os animais da fazenda.`
       },
       {
         img: 'st2.gif',
         musica: 'musica2.mp3',
-        texto: `🌧️ Capítulo 2: A tempestade da infância\nA infância de Oprah foi marcada por traumas profundos. Entre os 9 e os 14 anos, foi vítima de diversos abusos. Sentia-se invisível, como uma voz perdida em meio ao silêncio. Mas foi na educação que ela encontrou seu refúgio: livros tornaram-se portais para outros mundos, e a escrita, um grito de liberdade. Aos 14 anos, após engravidar e perder o filho, muitos pensaram que tudo acabaria ali. Mas ali começava sua metamorfose.`
+        texto: `Capítulo 2: A Infância Sombria\n
+Ao mudar-se para viver com a mãe em Milwaukee, sua vida mudou drasticamente. Viveu em bairros violentos e sofreu abusos que deixaram cicatrizes profundas. Apesar disso, encontrou consolo nos livros e na escola. A educação se tornou seu santuário, e suas notas a destacaram entre os colegas. A jovem Oprah já compreendia que seu destino não seria comum.`
       },
       {
         img: 'st3.gif',
         musica: 'musica3.mp3',
-        texto: `📺 Capítulo 3: A primeira luz na televisão\nDeterminada a vencer, Oprah conquistou uma bolsa de estudos, destacando-se na escola e na oratória. Aos 19 anos, tornou-se a primeira mulher negra a apresentar as notícias na TV de Nashville. Enfrentou racismo, machismo e dúvidas, mas sua empatia singular a tornou incomparável. Onde muitos liam scripts, ela enxergava histórias. Onde outros viam números, ela via almas.`
+        texto: `Capítulo 3: Os Primeiros Passos na Televisão\n
+Aos 19 anos, Oprah conquistou um feito raro para uma mulher negra: se tornou âncora de um telejornal local em Nashville. Sua presença carismática e natural diante das câmeras logo chamou a atenção. Mesmo sem formação tradicional, sua empatia transbordava, e ela sabia ouvir como poucos. Esse talento abriria portas gigantescas.`
       },
       {
         img: 'st4.gif',
         musica: 'musica4.mp3',
-        texto: `🎤 Capítulo 4: O show que virou revolução\nEm 1986, nascia o "The Oprah Winfrey Show". Não era apenas um talk show: era um espelho da sociedade. Oprah abordava temas tabus, chorava com os convidados, celebrava conquistas e enfrentava injustiças com ternura e firmeza. Sua presença transformou o programa em um ritual diário para milhões. Pela primeira vez, o sofrimento tinha palco — e escuta.`
+        texto: `Capítulo 4: A Revolução na TV\n
+Em 1986, nasce o “The Oprah Winfrey Show”. Com ele, Oprah transformou a televisão diurna. Abordando temas como racismo, abuso, espiritualidade e cura emocional, ela criou um espaço seguro para vozes silenciadas. Não era só um programa, era um movimento. Oprah fazia as pessoas chorarem, rirem e, acima de tudo, refletirem.`
       },
       {
         img: 'st5.gif',
         musica: 'musica5.mp3',
-        texto: `📚 Capítulo 5: Império de alma e propósito\nOprah fundou sua própria produtora, Harpo, tornando-se uma das mulheres mais poderosas da mídia. Criou clubes de leitura, estrelou filmes, produziu séries e ergueu escolas na África. Sua fortuna cresceu, mas crescia mais sua missão de elevar consciências. Ela usou sua influência para empoderar, educar e inspirar gerações — um império construído não sobre tijolos, mas sobre valores.`
+        texto: `Capítulo 5: O Império de Mídia e Coração\n
+Oprah não parou na TV. Criou sua própria produtora, lançou um clube do livro que impulsionava autores desconhecidos às listas de best-sellers, estrelou filmes e tornou-se referência de negócios e generosidade. Sua fundação já investiu milhões em causas sociais e educação, especialmente para meninas negras. Ela provou que é possível ser rica e compassiva.`
       },
       {
         img: 'st6.jpg',
         musica: 'musica6.mp3',
-        texto: `✨ Capítulo 6: O legado eterno\nHoje, Oprah é sinônimo de superação, compaixão e transformação. Seu legado ecoa em ações sociais, em jovens que acreditam no impossível, em mulheres que reencontram suas vozes. Ela mostrou que vulnerabilidade é força, e que histórias podem curar. A história de Oprah não termina — ela se reinventa, como toda grande alma que veio ao mundo para iluminar.`
+        texto: `Capítulo 6: O Legado\n
+Hoje, Oprah é sinônimo de resiliência, liderança e luz. Seu legado transcende a fama. Ela inspira gerações a se amarem, a buscarem a verdade e a usarem suas vozes. Como ela mesma diz: “Transforme suas feridas em sabedoria.” E foi isso que ela fez — e nos ensinou a fazer também.`
       }
     ];
 
@@ -170,37 +202,28 @@ git remote add origin https://github.com/Apolo1Arthur/Trabalho2.0.git
       mostrarSlide();
     }
 
-    function irParaSlide(i) {
-      index = i;
-      mostrarSlide();
-    }
-
     function mostrarSlide() {
       const atual = slides[index];
       slideDiv.style.backgroundImage = `url('${atual.img}')`;
-      textBox.style.opacity = 0;
-      setTimeout(() => {
-        textBox.textContent = '';
-        escreverTexto(atual.texto);
-        bgMusic.src = atual.musica;
-        bgMusic.play();
-        prevBtn.disabled = index === 0;
-        nextBtn.disabled = index === slides.length - 1;
-      }, 300);
+      textBox.innerHTML = '';
+      digitarTexto(atual.texto);
+      bgMusic.src = atual.musica;
+      bgMusic.play();
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === slides.length - 1;
     }
 
-    function escreverTexto(texto) {
+    function digitarTexto(texto) {
       let i = 0;
-      textBox.textContent = '';
-      textBox.style.opacity = 1;
-      function digita() {
+      function escrever() {
         if (i < texto.length) {
-          textBox.textContent += texto.charAt(i);
+          textBox.innerHTML += texto.charAt(i);
           i++;
-          setTimeout(digita, 20);
+          setTimeout(escrever, 20);
         }
       }
-      digita();
+      escrever();
     }
-  </script></body>
+  </script>
+</body>
 </html>
