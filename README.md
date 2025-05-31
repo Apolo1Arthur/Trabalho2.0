@@ -7,210 +7,161 @@ git remote add origin https://github.com/Apolo1Arthur/Trabalho2.0.git
  git push -u origin main
 
 
-    <!DOCTYPE html>
-<html lang="pt-br">
+    
+    <!DOCTYPE html><html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>História de Oprah Winfrey</title>
+  <title>Oprah Winfrey - História Interativa</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {margin: 0; padding: 0; box-sizing: border-box;}
     html, body {
-      height: 100%; width: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: black;
-      color: white;
-      overflow: hidden;
+      height: 100%; width: 100%; background: black; color: white;
+      font-family: 'Segoe UI', sans-serif; overflow: hidden;
     }
     #slide {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 40px 60px 80px;
-      text-align: center;
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; align-items: center;
+      padding: 60px 40px; text-align: center;
+      animation-fill-mode: forwards;
     }
     #textBox {
-      max-width: 900px;
-      background: rgba(0,0,0,0.6);
-      border-radius: 15px;
-      padding: 20px 30px;
-      font-size: 1.3rem;
-      line-height: 1.6;
-      animation: textIntro 2s ease forwards;
+      max-width: 800px; padding: 25px 30px;
+      background: rgba(0,0,0,0.7); border-radius: 15px;
+      font-size: 1.3rem; line-height: 1.6;
+      animation-fill-mode: forwards; opacity: 0;
     }
-    #controls, #extraControls {
-      position: fixed;
-      bottom: 20px;
-      display: none;
-      gap: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
+    #controls {
+      position: fixed; bottom: 20px;
+      left: 50%; transform: translateX(-50%);
+      display: flex; gap: 15px;
+      z-index: 50;
     }
     button {
-      padding: 12px 22px;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 10px;
-      background-color: rgba(255,255,255,0.85);
-      cursor: pointer;
-      transition: transform 0.2s, background-color 0.3s;
+      padding: 12px 22px; font-size: 1rem;
+      background: rgba(255,255,255,0.85);
+      border: none; border-radius: 10px;
+      cursor: pointer; transition: 0.3s;
     }
     button:hover:not(:disabled) {
-      transform: scale(1.05);
-      background-color: white;
+      background: white; color: black;
     }
     button:disabled {
-      background-color: rgba(180,180,180,0.4);
+      background: rgba(150,150,150,0.5);
       cursor: default;
     }
-    #startScreen {
-      position: absolute;
-      inset: 0;
-      background-image: url('st0.jpg');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 100;
+    #introSlide {
+      position: absolute; inset: 0;
+      background: url('st0.jpg') center/cover no-repeat;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      gap: 20px; z-index: 100;
+    }
+    #introSlide h1 {
+      font-size: 3.2rem; color: #fff;
+      animation: pulseText 3s ease-in-out infinite;
+      text-align: center;
     }
     #startBtn {
-      margin-top: 20px;
-      padding: 15px 30px;
-      font-size: 1.4rem;
-      border-radius: 20px;
-      background-color: white;
-      color: black;
-      font-weight: bold;
-      box-shadow: 0 0 10px white;
+      font-size: 1.2rem; padding: 14px 30px;
+      border-radius: 12px;
+      background-color: rgba(255,255,255,0.9);
     }
-
-    /* Texto derretido/animado */
-    .meltText {
-      font-size: 1.3rem;
-      animation: melt 2s ease forwards;
+    @keyframes pulseText {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 0.8; }
     }
-    @keyframes melt {
-      0% { transform: scaleY(1.2) skewY(2deg); filter: blur(2px); opacity: 0; }
-      50% { transform: scaleY(0.8) skewY(-3deg); filter: blur(1px); opacity: 1; }
-      100% { transform: scaleY(1) skewY(0); filter: blur(0); opacity: 1; }
+    @keyframes derreter {
+      0% { transform: scaleY(1.3) skewY(5deg); opacity: 0; }
+      50% { transform: scaleY(0.8) skewY(-3deg); opacity: 1; }
+      100% { transform: scaleY(1) skewY(0); opacity: 1; }
     }
-
-    /* Slide animações */
-    .slideIn { animation: fadeSlide 2s ease forwards; }
-    @keyframes fadeSlide {
-      from { opacity: 0; transform: scale(1.1); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
   </style>
 </head>
 <body>
+  <div id="introSlide">
+    <h1>História Misteriosa de Oprah Winfrey</h1>
+    <button id="startBtn">Iniciar</button>
+  </div>  <div id="slide" style="display:none;"></div>
+  <div id="textBox"></div>
+  <div id="controls" style="display:none;">
+    <button id="prevBtn">Anterior</button>
+    <button id="chapterBtn">Ver Capítulos</button>
+    <button id="nextBtn">Próximo</button>
+  </div><audio id="bgMusic" autoplay loop></audio> <audio id="clickSound" src="ip.wav"></audio>
 
-<div id="startScreen">
-  <h1 style="font-size:3rem; text-shadow: 0 0 15px white;">História de Oprah Winfrey</h1>
-  <button id="startBtn">Iniciar</button>
-</div>
+  <script>
+    const textos = [
+      '',
+      'Capítulo 1: O nascimento de Oprah Winfrey... Oprah nasceu no Mississippi, em meio à pobreza e adversidade, mas sua determinação brilhou desde cedo.',
+      'Capítulo 2: Infância difícil... Abusos e rejeições marcaram sua infância, mas sua força interior começou a florescer.',
+      'Capítulo 3: Primeiros passos na TV... Ainda jovem, Oprah se destacou na televisão local, abrindo caminho com talento único.',
+      'Capítulo 4: O talk show que mudou tudo... Seu programa se tornou um marco, abordando temas reais e conectando milhões.',
+      'Capítulo 5: O império... Além da TV, criou editoras, rádios e atuou no cinema, tornando-se um ícone global.',
+      'Capítulo 6: Filantropia e impacto social... Oprah inspirou e ajudou milhões com doações, educação e exemplo.',
+      'Capítulo 7: Um legado eterno... Até hoje, ela segue como símbolo de superação, voz ativa por justiça e igualdade.',
+      'Ver Capítulos: Escolha um capítulo para visitar.'
+    ];
 
-<div id="slide"></div>
-<div id="textBox" class="meltText"></div>
+    const imagens = [
+      '', 'st1.gif','st2.gif','st3.gif','st4.gif','st5.gif','st6.jpg','st7.jpg','stx.jpg'
+    ];
+    const musicas = [
+      '', 'musica1.mp3','musica2.mp3','musica3.mp3','musica4.mp3','musica5.mp3','musica6.mp3','musica7.mp3','musicax.mp3'
+    ];
 
-<div id="controls">
-  <button id="prevBtn">Anterior</button>
-  <button id="nextBtn">Próximo</button>
-</div>
+    let currentSlide = 0;
+    const totalSlides = textos.length - 1;
+    const slide = document.getElementById('slide');
+    const textBox = document.getElementById('textBox');
+    const intro = document.getElementById('introSlide');
+    const controls = document.getElementById('controls');
+    const bgMusic = document.getElementById('bgMusic');
+    const clickSound = document.getElementById('clickSound');
 
-<div id="extraControls">
-  <button id="chapterBtn">Ver Capítulos</button>
-</div>
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const chapterBtn = document.getElementById('chapterBtn');
 
-<audio id="backgroundMusic" autoplay loop></audio>
-<audio id="clickSound" src="ip.wav"></audio>
-
-<script>
-  const slide = document.getElementById('slide');
-  const textBox = document.getElementById('textBox');
-  const startScreen = document.getElementById('startScreen');
-  const startBtn = document.getElementById('startBtn');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const chapterBtn = document.getElementById('chapterBtn');
-  const controls = document.getElementById('controls');
-  const extraControls = document.getElementById('extraControls');
-  const bgMusic = document.getElementById('backgroundMusic');
-  const clickSound = document.getElementById('clickSound');
-
-  const textos = [
-    "", // 0 - início
-    "Capítulo 1: Oprah nasceu no Mississippi em uma família pobre, superando desafios desde cedo.",
-    "Capítulo 2: Uma infância de dificuldades e abusos moldou sua força e empatia.",
-    "Capítulo 3: Aos 19 anos, sua carreira começou na TV local, onde seu carisma brilhou.",
-    "Capítulo 4: Com seu talk show, Oprah impactou a cultura americana profundamente.",
-    "Capítulo 5: Tornou-se uma empresária poderosa e símbolo de empoderamento feminino.",
-    "Capítulo 6: Seu legado vai além da mídia — é um ícone de transformação e generosidade.",
-    "Menu de Capítulos: Selecione um capítulo para visitar diretamente."
-  ];
-
-  const imagens = [
-    "", "st1.jpg", "st2.gif", "st3.gif", "st4.gif", "st5.gif", "st6.jpg", "stx.jpg"
-  ];
-
-  const musicas = [
-    "", "musica1.mp3", "musica2.mp3", "musica3.mp3", "musica4.mp3", "musica5.mp3", "musica6.mp3", "musicax.mp3"
-  ];
-
-  let currentIndex = 0;
-
-  function updateSlide() {
-    clickSound.play();
-    if (currentIndex === 0) return;
-
-    slide.className = 'slideIn';
-    textBox.className = 'meltText';
-
-    slide.style.backgroundImage = `url(${imagens[currentIndex]})`;
-    textBox.textContent = textos[currentIndex];
-
-    bgMusic.src = musicas[currentIndex];
-    bgMusic.play();
-
-    prevBtn.disabled = currentIndex === 1;
-    nextBtn.disabled = currentIndex >= textos.length - 2;
-  }
-
-  prevBtn.onclick = () => {
-    if (currentIndex > 1) {
-      currentIndex--;
-      updateSlide();
+    function tocarMusica(index) {
+      bgMusic.src = musicas[index] || '';
+      bgMusic.play();
     }
-  };
 
-  nextBtn.onclick = () => {
-    if (currentIndex < textos.length - 2) {
-      currentIndex++;
-      updateSlide();
+    function mostrarSlide(index) {
+      currentSlide = index;
+      clickSound.play();
+      slide.style.display = 'flex';
+      controls.style.display = 'flex';
+      slide.style.backgroundImage = `url(${imagens[index]})`;
+      textBox.textContent = '';
+      textBox.style.opacity = 0;
+
+      setTimeout(() => {
+        textBox.textContent = textos[index];
+        textBox.style.animation = 'derreter 1.8s ease';
+        textBox.style.opacity = 1;
+      }, 200);
+
+      prevBtn.disabled = index <= 1;
+      nextBtn.disabled = index >= totalSlides;
+
+      tocarMusica(index);
     }
-  };
 
-  startBtn.onclick = () => {
-    startScreen.style.display = 'none';
-    currentIndex = 1;
-    controls.style.display = 'flex';
-    extraControls.style.display = 'flex';
-    updateSlide();
-  };
+    document.getElementById('startBtn').onclick = () => {
+      intro.style.display = 'none';
+      mostrarSlide(1);
+    };
 
-  chapterBtn.onclick = () => {
-    currentIndex = textos.length - 1; // índice do menu de capítulos
-    updateSlide();
-  };
-</script>
-</body>
+    nextBtn.onclick = () => {
+      if (currentSlide < totalSlides) mostrarSlide(currentSlide + 1);
+    };
+    prevBtn.onclick = () => {
+      if (currentSlide > 1) mostrarSlide(currentSlide - 1);
+    };
+    chapterBtn.onclick = () => mostrarSlide(totalSlides);
+  </script></body>
 </html>
